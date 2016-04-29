@@ -1,44 +1,62 @@
-;(function(win, doc, undefined) {
+;(function(window) {
 
-	var Jackyjs = function(selector) {
-		return new Jackyjs.fn.init(selector);
+	var DOC = window.document,
+		
+
+	var aQuery = function(selector) {
+	    return new aQuery.fn.init(selector);
 	};
 
-	Jackyjs.fn = Jackyjs.prototype = {
+	aQuery.fn = aQuery.prototype = {
+	    name: 'Jacky',
 		init: function(selector) {
 			this.selector = selector;
+			sizzle(this, selector);
 			return this;
+		},
+		constructor: aQuery,
+		append: function(){
+
+		},
+		prepend: function(){
+
+		},
+		appendTo: function(){
+
 		}
 	};
+	
+	var sizzle =  function(newA, selector){
+		var domlist = document.querySelectorAll(selector);
+		Array.prototype.push.apply(newA, domlist);
+		return newA;
+	};
 
-	Jackyjs.extend = Jackyjs.fn.extend = function() {
-		var options,  copy,
+	aQuery.fn.init.prototype = aQuery.fn;
+
+	aQuery.extend = aQuery.fn.extend = function() {
+		var options,
 			target = arguments[0] || {},
-			i = 1,
+		 	i = 1,
 			length = arguments.length;
 
 		//只有一个参数，就是对jQuery自身的扩展处理
 		//extend,fn.extend
-		if(i === length){
-			target = this;//调用的上下文对象jQuery/或者实例
+		if (i === length) {
+			target = this; //调用的上下文对象jQuery/或者实例
 			i--;
 		}
-
 		for (; i < length; i++) {
-			//从i开始取参数,不为空开始遍历
 			if ((options = arguments[i]) != null) {
 				for (name in options) {
-					copy = options[name];
-					//覆盖拷贝
-					target[name] = copy;
+					target[name] = options[name];
 				}
 			}
 		}
-
 		return target;
 	};
 
-	Jackyjs.extend({
+	aQuery.extend({
 		removeAllImgs : function() {
 			var imgs = document.querySelectorAll('img');
 			for(var i = 0; i < imgs.length; i++ ) {
@@ -50,12 +68,22 @@
 				}
 			}
 		}
-	})
+	});
 
-	Jackyjs.prototype.init.prototype = Jackyjs.prototype;
+	aQuery.fn.extend({
+		setName: function(myName) {
+			this.myName = myName;
+			return this;
+		},
+		getName: function() {
+			console.log(this.myName);
+			return this;
+		}
+	});
 
-	window.Jackyjs = Jackyjs;
 
-})(typeof window !== "undefined" ? window : this, document);
+	window.$$ = window.aQuery = aQuery;
+
+})(typeof window !== "undefined" ? window : this);
 
 

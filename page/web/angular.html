@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html ng-app="phonecatApp" ng-controller="PhoneListCtrl">
+<head>
+    <meta charset="UTF-8">
+    <title ng-bind-template="Title:{{query}}">Title</title>
+
+    <style>
+        input.ng-invalid {
+            background-color: #ccf;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        Search: <input ng-model="query" required><span>{{query || rootStr}}</span>
+        Sort by:
+        <select ng-model="orderProp">
+            <option value="name">Alphabetical</option>
+            <option value="age">Newest</option>
+        </select>
+
+        <ul>
+            <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+                {{phone.name}}
+                <span>{{phone.snippet}}</span>
+            </li>
+        </ul>
+        <p>Total number of phones: {{phones.length}}</p>
+        <p>{{sayHello()}}</p>
+    </div>
+
+    <div>
+        <table>
+            <tr><th>row number</th></tr>
+            <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"><td>{{i}}</td></tr>
+        </table>
+    </div>
+
+
+
+    <runoob-directive></runoob-directive>
+
+    <div runoob-directive></div>
+
+    <div class="runoob-directive"></div>
+
+    <!-- 指令: runoob-directive -->
+
+
+    <form name="myForm" ng-init="myText = 'test@runoob.com'">
+        Email:
+        <input type="email" name="myAddress" ng-model="myText">
+        <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+        <h1>状态</h1>
+        <p>Valid: {{myForm.myAddress.$valid}} (如果输入的值是合法的则为 true)。</p>
+        <p>Dirty: {{myForm.myAddress.$dirty}} (如果值改变则为 true)。</p>
+        <p>Touched: {{myForm.myAddress.$touched}} (如果通过触屏点击则为 true)。</p>
+    </form>
+
+
+<script type="text/javascript" src="/static/common/angular.js" feather-position-fixed></script>
+
+<script type="text/javascript" feather-position-fixed>
+    require.async('/static/web/angular/test.js');
+
+    var phonecatApp = angular.module('phonecatApp', []);
+
+    phonecatApp.controller('PhoneListCtrl', function($scope, $rootScope, $location, $http) {
+        $scope.phones = [
+            {'name': 'Nexus S',
+                'snippet': 'Fast just got faster with Nexus S.',
+                'age': 1},
+            {'name': 'Motorola XOOM™ with Wi-Fi',
+                'snippet': 'The Next, Next Generation tablet.',
+                'age': 2},
+            {'name': 'MOTOROLA XOOM™',
+                'snippet': 'The Next, Next Generation tablet.',
+                'age': 3}
+        ];
+
+        $scope.orderProp = 'age';
+        $scope.sayHello = function(){
+            return "Say Hello";
+        }
+
+        console.log($location);
+
+        $http.get("/test/ajax").then(function (response) {
+            console.log('response:', response);
+        });
+
+        $rootScope.rootStr = "Here is rootStr";
+    });
+
+    phonecatApp.directive("runoobDirective", function() {
+        return {
+            //restrict 默认值为 EA, 即可以通过元素名和属性名来调用指令。
+
+            //restrict : "E", E 只限元素名使用
+            //restrict : "A", A 只限属性使用
+
+            //restrict : "C", C 只限类名使用
+
+            //restrict : "M", M 只限注释使用
+            //replace : true, M 必须配合replace才能使用
+
+            template : "<h1>自定义指令!</h1>"
+        };
+    });
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -20,18 +20,28 @@
 		},
 		constructor: aQuery,
 
-		each: function(callback){
+		each: function(callback) {
 			return aQuery.each(this, callback);
 		},
 
-		append: function(){
+		append: function() {
 
 		},
-		prepend: function(){
+		prepend: function() {
 
 		},
-		appendTo: function(){
+		appendTo: function() {
 
+		},
+		
+		parent: function() {
+			return dir.call(this, "parentNode", 0, selector);
+		},
+		parents: function() {
+			
+		},
+		parentsUntil: function() {
+			
 		}
 	};
 	
@@ -57,7 +67,7 @@
 		}
 		for (; i < length; i++) {
 			if ((options = arguments[i]) != null) {
-				for (name in options) {
+				for (var name in options) {
 					target[name] = options[name];
 				}
 			}
@@ -113,7 +123,7 @@
 			return str.replace(trimExpr, "");
 		},
 
-		/* Demo */
+		/* Demo for myself */
 		removeAllImgs : function() {
 			var imgs = document.querySelectorAll('img');
 			for(var i = 0; i < imgs.length; i++ ) {
@@ -126,6 +136,13 @@
 			}
 		}
 	});
+
+	function dir(elem, dir, until){
+		var arr = [];
+		
+		
+		return arr;
+	}
 
 	aQuery.fn.extend({
 		/*setName: function(myName) {
