@@ -1,0 +1,94 @@
+.each-wrap {
+	position: relative;
+	float: left;
+	width: 200px;
+	height: 150px;
+	line-height: 150px;
+	padding: 20px;
+	margin: 10px;
+	border: 1px dashed #aaa;
+	/*&:before {
+		content: '';
+		float: left;
+		height: 50%;
+		margin-bottom: -35px;
+	}*/
+}
+.each-div {
+	/*position: relative;
+	clear: left;
+	height: 70px;*/
+	position:absolute; top:0; bottom:0; left:0; right:0; margin:auto; height:50%; width:50%;
+	line-height: 95px;
+	text-align: center;
+	border-radius: 10px;
+	transition: all .5s linear;
+	-ms-transition: all .5s linear;
+	-webkit-transition: all .5s linear;
+	&.rotate-demo:hover {
+		transform: rotate(45deg); 				
+		-webkit-transform: rotate(45deg); 	 			/* Safari, Chrome */
+		-ms-transform: rotate(45deg); 					/* IE 9 */
+
+		/*transform-origin: top left;*/
+	}
+	&.skew-demo:hover {
+		transform: skew(30deg, 20deg);
+		-ms-transform: skew(30deg, 20deg); 				/* IE 9 */
+		-webkit-transform: skew(30deg, 20deg); 			/* Safari, Chrome */
+	}
+	&.scale-demo:hover {
+		transform: scale(1.6, 1.5);
+		-ms-transform: scale(1.6, 1.5); 				/* IE 9 */
+		-webkit-transform: scale(1.6, 1.5); 			/* Safari, Chrome */
+	}
+	&.translate-demo:hover {
+		transform: translate(50px, 40px);
+		-ms-transform: translate(50px, 40px); 			/* IE 9 */
+		-webkit-transform: translate(50px, 40px); 		/* Safari and Chrome */
+	}
+
+	&.ani {
+		animation-duration: 2.5s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+	&.animation-demo:hover {
+		animation-name: hello;
+	}
+	&.animation-demo2 {
+		animation-name: move;
+		animation-direction: alternate;
+		animation-play-state: paused;
+	}
+	&.animation-demo2:hover {
+		animation-play-state: running;
+	}
+	&.animation-demo3 {
+		animation-duration: 2.5s;
+		animation-timing-function: linear;
+		animation-delay: 2s;
+		animation-fill-mode: both;
+	}
+	&.animation-demo3:hover {
+		animation-name: move;
+	}
+}
+
+@keyframes hello {
+	50% {
+		color: #fff;
+		background-color: #f66;
+		width: 60%;
+	}
+}
+@keyframes move {
+	0% {
+		background-color: #096;
+	}
+	100% {
+		transform: translate(50px, 40px);
+		-ms-transform: translate(50px, 40px); 			
+		-webkit-transform: translate(50px, 40px); 
+	}
+}

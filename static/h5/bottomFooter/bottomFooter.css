@@ -1,0 +1,56 @@
+html, body {
+	height: 100%;
+}
+.wrapper {
+	/*position: relative;*/
+	width: 700px;
+
+	/* 
+		理解: 
+		将主体wrap设置最小高度, 2个功能, 
+		在屏幕高度大于wrap高度的时候, 将wrap的高度时刻设置为body的高度, 满足撑满全屏的作用, 
+		当高度不足wrap内容高度的时候, 维持wrap的最小高度, 不会将footer上移至wrap内容之中.
+	 */
+	min-height: 100%;    
+
+	/*height: auto !important;*/
+
+	/*
+		理解:
+		wrap底部设置负margin, 大小等于footer的高度, wrap维持屏幕高度, 并在底部留出一个负的"凹槽", 供footer吸附, 
+		保持全屏高度的同时, footer始终居于底部
+	*/
+	margin: 0 auto -155px;
+	background-color: #6cc;
+	p {
+		height: 100px;
+		line-height: 100px;
+	}
+	/*&:after {
+		content: '';
+		height: 155px;
+	};*/
+}
+
+.content {
+	/*
+		理解:
+		在wrap内部的内容最后一个元素设置padding-bottom, 亦或者设置高度, 亦或者给wrap设置:after伪元素, 
+		(注: 不可使用margin 会与wrap的-margin造成抵消效果)
+		本质目的就是保持wrap本身的最小高度, 并且在高度不足时, 预留一个负的padding"凹槽", 
+		此时 padding 与 wrap的margin 重叠, 使得wrap跟footer看起来像是正常的流式布局一样;
+	*/
+	/*height: (100 + 155) = 255px;*/
+	padding-bottom: 155px;
+}
+/*.push {
+	height: 155px;
+}*/
+
+.footer {
+	/*position: relative;*/
+	width: 700px;
+	height: 155px;
+	margin: 0 auto;
+	background-color: #f9c;
+}

@@ -1,0 +1,32 @@
+<?php $this->component('h5:header');?>
+<link rel="stylesheet" type="text/css" href="/static/h5/rem/rem.css">
+<div class="title">This is Title</div>
+<section class="input-sec">
+	<div><label>输入框1：</label><input type="text" class="first"/></div>
+	<div>
+		<label>输入框2：</label><input type="text"/>
+	</div>
+	<div>
+		<label>输入框3：</label><input type="text"/>
+	</div>
+	<div>
+		<label>输入框4：</label><input type="text"/>
+	</div>
+</section>
+<section class="show-sec">
+	<div class="rem1">这是1rem</div>
+	<div class="rem2">这是2rem</div>
+	<div class="rem3">这是3rem</div>
+	<div class="rem4">这是4rem</div>	
+</section>
+
+<script type="text/javascript">
+	function fixRem(){
+		var ele=document.getElementsByTagName("html")[0],  
+		     size=document.body.clientWidth/320*12;  
+		ele.style.fontSize=size+"px";
+	}
+	window.addEventListener('resize', fixRem, false);
+	fixRem();
+</script>
+<?php $this->component('h5:footer');?>

@@ -1,0 +1,30 @@
+<?php $this->component('web:header');?>
+<link rel="stylesheet" type="text/css" href="/static/web/index/index.css">
+
+<section class="win8-main">
+	<div class="win8-line line5">
+		<div class="win8-box box22 row2 column2">1</div>
+		<div class="win8-box box21 column2">2</div>
+		<div class="win8-box box14 row4">3</div>
+	</div>
+	<div class="win8-line line4">
+		<!-- <div class="empty box21 column2"></div> -->
+		<div class="win8-box box11 l2e">4</div>
+		<div class="win8-box box12 row2">5</div>
+	</div>
+	<div class="win8-line line3">
+		<div class="win8-box box12 row2">6</div>
+		<div class="win8-box box21 column2">7</div>
+	</div>
+	<div class="win8-line line2">
+		<!-- <div class="empty box11"></div> -->
+		<div class="win8-box box31 column3 l1e">8</div>
+	</div>
+</section>
+
+<canvas id="bg"></canvas>
+
+<script type="text/javascript">
+	require.async('/static/web/index/index.js');
+</script>
+<?php $this->component('web:footer');?>

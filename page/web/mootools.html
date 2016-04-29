@@ -1,0 +1,109 @@
+<?php $this->component('web:header');?>
+
+<style type="text/css">
+	.trans-wrap {
+		margin: 10px;
+		width: 1000px;
+		height: 400px;
+		border: 1px dashed #ccc;
+	}
+	.trans-demo {
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		background-color: #6cf;
+	}
+</style>
+<!--<script type="text/javascript">
+	console.time('loading:');
+	console.time('loadjs:');
+
+	console.time('loaddom:');
+</script>
+<script src="http://www.google-analytics.com/analytics.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/static/web/mootools/fx.js"></script>
+
+<script type="text/javascript">
+	console.timeEnd('loadjs:');
+</script>
+
+<div></div>
+<div></div>
+<div></div>
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>-->
+
+<div id="transition_bar">
+	<a href="javascript:;" onclick="abc.start()">start</a>
+	<a href="javascript:;" onclick="abc.pause()">pause</a>
+	<a href="javascript:;" onclick="abc.resume()">resume</a>
+</div>
+
+<div id="transition_test" class="trans-wrap">
+	<div id="transition_demo" class="trans-demo"></div>
+</div>
+
+
+<div id="slide_bar">
+	<a href="javascript:;">slideout</a>
+
+	<a href="javascript:;">slidein</a>
+
+	<a href="javascript:;">slidetoggle</a>
+
+	<a href="javascript:;">hide</a>
+</div>
+
+<div id="slide_test">
+	<p>这里是内容1</p>
+	<p>这里是内容2</p>
+	<p>这里是内容3</p>
+	<p>这里是内容4</p>
+	<p>这里是内容5</p>
+	<p>这里是内容6</p>
+</div>
+
+
+<!-- <script type="text/javascript" src="/static/web/mootools/origin/Core.js" feather-position-fixed></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Class.js" feather-position-fixed></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Class.Extras.js" feather-position-fixed></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Class.Thenable.js" feather-position-fixed></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Element.js"></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Array.js" feather-position-fixed></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Fx.js" feather-position-fixed></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Fx.CSS.js" feather-position-fixed></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Fx.Morph.js"></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Fx.Transitions.js"></script>
+<script type="text/javascript" src="/static/web/mootools/origin/Fx.Tween.js"></script> -->
+
+<!-- <script type="text/javascript" src="/static/web/mootools/Core.js"></script>
+<script type="text/javascript" src="/static/web/mootools/Fx.js"></script>
+<script type="text/javascript" src="/static/web/mootools/Fx.Transitions.js"></script> -->
+<!-- <script type="text/javascript" src="/static/web/mootools/Fx.Slide.js"></script> -->
+<!-- <script type="text/javascript" src="/static/web/mootools/demo.js"></script> -->
+
+<script type="text/javascript" src="/static/web/mootools2/Core.js"></script>
+
+<script type="text/javascript" src="/static/web/mootools2/Class.js"></script>
+
+<script type="text/javascript" src="/static/web/mootools2/Fx.js"></script>
+
+<script type="text/javascript" src="/static/web/mootools2/Fx.CSS.js"></script>
+
+
+
+<script type="text/javascript" feather-position-bottom>
+	//console.timeEnd('loaddom:');
+	//console.log(123);
+	//require.async('/static/web/mootools/fx.js');
+	//require.async('/static/web/mootools/demo.js');
+	//var a = new Fx();
+</script> 
+<?php $this->component('web:footer');?>
