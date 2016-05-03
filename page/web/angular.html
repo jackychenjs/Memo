@@ -8,11 +8,18 @@
         input.ng-invalid {
             background-color: #ccf;
         }
+        table, th , td {
+            padding: 5px;
+            border: 1px solid grey;
+            border-collapse: collapse;
+        }
     </style>
+
 </head>
 <body>
 
     <div>
+        <!-- query -->
         Search: <input ng-model="query" required><span>{{query || rootStr}}</span>
         Sort by:
         <select ng-model="orderProp">
@@ -38,7 +45,7 @@
     </div>
 
 
-
+    <!-- angular directive 自定义指令 -->
     <runoob-directive></runoob-directive>
 
     <div runoob-directive></div>
@@ -48,6 +55,8 @@
     <!-- 指令: runoob-directive -->
 
 
+
+    <!-- form elements -->
     <form name="myForm" ng-init="myText = 'test@runoob.com'">
         Email:
         <input type="email" name="myAddress" ng-model="myText">
@@ -56,7 +65,56 @@
         <p>Valid: {{myForm.myAddress.$valid}} (如果输入的值是合法的则为 true)。</p>
         <p>Dirty: {{myForm.myAddress.$dirty}} (如果值改变则为 true)。</p>
         <p>Touched: {{myForm.myAddress.$touched}} (如果通过触屏点击则为 true)。</p>
+
+
+        <select ng-model="selectedName" ng-options="x for x in names"></select>
+
+        <select id="test_sel2" ng-model="selectedSite" ng-options="x.site for x in sites"></select>
+        <h1>你选择的是: {{selectedSite.site}}</h1>
+        <p>网址为: {{selectedSite.url}}</p>
+
+        <select ng-model="selectedCar" ng-options="y.brand for (x, y) in cars">
+        </select>
+
+        <h1>你选择的是: {{selectedCar.brand}}</h1>
+        <h2>模型: {{selectedCar.model}}</h2>
+        <h3>颜色: {{selectedCar.color}}</h3>
     </form>
+
+
+    <!--  table  -->
+    <table>
+        <tr ng-repeat="x in tableData">
+            <td>{{ $index + 1 }}</td>
+            <td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Name }}</td>
+            <td ng-if="$even">{{ x.Name }}</td>
+            <td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Country | uppercase }}</td>
+            <td ng-if="$even">{{ x.Country | uppercase }}</td>
+        </tr>
+    </table>
+
+
+    <!--
+        ng-disabled 指令绑定应用程序数据 "mySwitch" 到 HTML 的 disabled 属性。
+        ng-model 指令绑定 "mySwitch" 到 HTML input checkbox 元素的内容（value）。
+     -->
+    <p>
+        <button ng-disabled="mySwitch">点我!</button>
+    </p>
+    <p>
+        <input type="checkbox" ng-model="mySwitch"/>按钮
+    </p>
+    <p>
+        {{ mySwitch }}
+    </p>
+
+    <p ng-show="true">我是可见的。</p>
+
+    <p ng-show="hour > 12">我是不可见的。</p>
+
+    <p ng-hide="true">我是不可见的。</p>
+
+    <p ng-hide="false">我是可见的。</p>
 
 
 <script type="text/javascript" src="/static/common/angular.js" feather-position-fixed></script>
@@ -64,9 +122,26 @@
 <script type="text/javascript" feather-position-fixed>
     require.async('/static/web/angular/test.js');
 
-    var phonecatApp = angular.module('phonecatApp', []);
+    var app = angular.module('phonecatApp', []);
 
-    phonecatApp.controller('PhoneListCtrl', function($scope, $rootScope, $location, $http) {
+    app.service('hexafy', function() {
+        this.myFunc = function (x) {
+            return x.toString(16).toUpperCase();
+        }
+    });
+
+    app.filter('myFormat', ['hexify', function(){
+        return function(x){           //                                            ↓
+            return hexify.myFunc(x);  // 使用 <li ng-repeat="x in counts">{{x | myFormat}}</li>
+        };
+    }]);
+
+
+    /*
+        在 AngularJS 中，服务是一个函数或对象，可在你的 AngularJS 应用中使用。
+        AngularJS 内建了30 多个服务。
+    */
+    app.controller('PhoneListCtrl', function($scope, $rootScope, $location, $http, $timeout, $interval, hexafy) {
         $scope.phones = [
             {'name': 'Nexus S',
                 'snippet': 'Fast just got faster with Nexus S.',
@@ -82,7 +157,45 @@
         $scope.orderProp = 'age';
         $scope.sayHello = function(){
             return "Say Hello";
-        }
+        };
+
+        $scope.names = ["Google", "Runoob", "Taobao"];              // ng-options 演示
+        $scope.sites = [                                            // 数组
+            {site : "Google", url : "http://www.google.com"},
+            {site : "Runoob", url : "http://www.runoob.com"},
+            {site : "Taobao", url : "http://www.taobao.com"}
+        ];
+        $scope.cars = {                                             // 对象
+            car01 : {brand : "Ford", model : "Mustang", color : "red"},
+            car02 : {brand : "Fiat", model : "500", color : "white"},
+            car03 : {brand : "Volvo", model : "XC90", color : "black"}
+        };
+
+        $scope.tableData = [
+            {
+                City: "Berlin",
+                Country: "Germany",
+                Name: "Alfreds Futterkiste"
+            },
+            {
+                City: "México D.F.",
+                Country: "Mexico",
+                Name: "Ana Trujillo Emparedados y helados"
+            },
+            {
+                City: "México D.F.",
+                Country: "Mexico",
+                Name: "Antonio Moreno Taquería"
+            }
+
+        ];
+
+        $scope.mySwitch= true;
+        $scope.hour = 13;
+
+
+
+        $rootScope.rootStr = "Here is rootStr";
 
         console.log($location);
 
@@ -90,10 +203,25 @@
             console.log('response:', response);
         });
 
-        $rootScope.rootStr = "Here is rootStr";
+        $timeout(function () {
+            console.log("Here is Timeout fuc");
+        }, 2000);
+
+        $interval(function () {
+            console.log(new Date().toLocaleTimeString());
+        }, 50000);
+
+        console.log(hexafy.myFunc(254));
     });
 
-    phonecatApp.directive("runoobDirective", function() {
+
+    /*
+     除了 AngularJS 内置的指令外，我们还可以创建自定义指令。
+     你可以使用 .directive 函数来添加自定义的指令。
+     要调用自定义指令，HTMl 元素上需要添加自定义指令名。
+     使用驼峰法来命名一个指令， runoobDirective, 但在使用它时需要以 - 分割, runoob-directive:
+    */
+    app.directive("runoobDirective", function() {
         return {
             //restrict 默认值为 EA, 即可以通过元素名和属性名来调用指令。
 
@@ -111,10 +239,7 @@
 
 
 
-
 </script>
-
-
 
 </body>
 </html>
