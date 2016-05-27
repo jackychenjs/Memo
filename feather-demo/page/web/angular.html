@@ -5,6 +5,12 @@
     <title ng-bind-template="Title:{{query}}">Title</title>
 
     <style>
+        body {
+            padding: 20px;
+        }
+        .ctrl-wrap {
+            margin: 0 auto;
+        }
         input.ng-invalid {
             background-color: #ccf;
         }
@@ -36,7 +42,7 @@
 <body>
 
     <!-- main demo -->
-    <div>
+    <div class="ctrl-wrap">
         <h1 ng-bind-template="Title:{{query}}"></h1>
 
         <div>
@@ -151,7 +157,7 @@
 
 
     <!-- sub demo -->
-    <div ng-controller="myCtrl">
+    <div class="ctrl-wrap" ng-controller="myCtrl">
         {{ firstName + " " + lastName }}
 
         <h2>Validation Example</h2>
@@ -183,6 +189,16 @@
         <h1>隐藏 DIV: <input type="checkbox" ng-model="myCheck"></h1>
 
         <div ng-hide="myCheck" class="hide-test"></div>
+
+
+        <h2>AngularJS 路由应用</h2>
+        <ul>
+            <li><a href="#/">首页</a></li>
+            <li><a href="#/computers">电脑</a></li>
+            <li><a href="#/printers">打印机</a></li>
+            <li><a href="#/blabla">其他</a></li>
+        </ul>
+        <div ng-view></div>
     </div>
 
 <script type="text/javascript" src="/static/common/angular.js" feather-position-fixed></script>
@@ -208,7 +224,12 @@
     console.log(angular.isNumber(num));
 
 
-    var app = angular.module('phonecatApp', ['ngAnimate']);
+    var app = angular.module('phonecatApp', ['ngAnimate', 'ngRoute']).config(['$routeProvider', function($routeProvider){
+        $routeProvider.when('/',{template:'这是首页页面'})
+            .when('/computers',{template:'这是电脑分类页面'})
+            .when('/printers',{template:'这是打印机页面'})
+            .otherwise({redirectTo:'/'});
+    }]);;
 
     app.service('hexafy', function() {
         this.myFunc = function (x) {
