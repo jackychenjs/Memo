@@ -1,6 +1,15 @@
 html, body {
 	height: 100%;
 }
+
+p {
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	-webkit-margin-start: 0;
+	-webkit-margin-end: 0;
+}
+
+
 .wrapper {
 	/*position: relative;*/
 	width: 700px;
@@ -21,27 +30,33 @@ html, body {
 		保持全屏高度的同时, footer始终居于底部
 	*/
 	margin: 0 auto -155px;
-	background-color: #6cc;
 	p {
-		height: 100px;
-		line-height: 100px;
+		height: 150px;
+		line-height: 150px;
+		background-color: #c99;
 	}
-	/*&:after {
+	&:after {
+		display: block;
 		content: '';
 		height: 155px;
-	};*/
+	};
 }
 
 .content {
+
+	background-color: #9c0 !important;
 	/*
 		理解:
 		在wrap内部的内容最后一个元素设置padding-bottom, 亦或者设置高度, 亦或者给wrap设置:after伪元素, 
 		(注: 不可使用margin 会与wrap的-margin造成抵消效果)
 		本质目的就是保持wrap本身的最小高度, 并且在高度不足时, 预留一个负的padding"凹槽", 
 		此时 padding 与 wrap的margin 重叠, 使得wrap跟footer看起来像是正常的流式布局一样;
+
+
 	*/
-	/*height: (100 + 155) = 255px;*/
-	padding-bottom: 155px;
+
+	/*height: (150 + 155) = 305px;*/
+	/*padding-bottom: 155px;*/
 }
 /*.push {
 	height: 155px;
@@ -52,5 +67,5 @@ html, body {
 	width: 700px;
 	height: 155px;
 	margin: 0 auto;
-	background-color: #f9c;
+	background-color: #669;
 }
