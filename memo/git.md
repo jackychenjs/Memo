@@ -1,14 +1,26 @@
 ## git 生成公钥，私钥
 
-在git命令行中，输入命令： cd ~/.ssh，来检测是否生成过key,没有生成过key，会有相关信息提示；然后输入命令：```$ ssh-keygen -t rsa -C “邮箱地址”```
+在git命令行中，输入命令： cd ~/.ssh，来检测是否生成过key,没有生成过key，会有相关信息提示；然后输入命令：
+
+```bash
+$ ssh-keygen -t rsa -C “邮箱地址”
+```
+
 按下回车键；然后根据返回的信息，找到.ssh目录下的两个文件；
+
 #### 生成ssh key
-```$ ssh-keygen -t rsa -C “jacky_cjs@163.com”```
+
+```bash
+ssh-keygen -t rsa -C “jacky_cjs@163.com”
+```
 
 #### 在github上添加SSH key
 在github上点击“setting”，找到添加SSH key的菜单，然后新增SSH key；把文件id_rsa.pub  里面的内容全部复制到 key编辑框中，保存完毕；
 
-在git命令行输入：```ssh  -T git@github.com```
+在git命令行输入：
+```bash
+ssh  -T git@github.com
+```
 这里会要求你输入SSH key密码，如果刚才生成SSH key时未输入密码，密码就为空；
 然后看到信息：ERROR: Hi 用户名! You’ve successfully authenticated；说明配置成功；
 
@@ -36,20 +48,20 @@ Git提供了一个换行符检查功能（core.safecrlf），可以在提交时�
 假如你正在Windows上写程序，又或者你正在和其他人合作，他们在Windows上编程，而你却在其他系统上，在这些情况下，你可能会遇到行尾结束符问题。这是因为Windows使用回车和换行两个字符来结束一行，而Mac和Linux只使用换行一个字符。虽然这是小问题，但它会极大地扰乱跨平台协作。
 
 * Git可以在你提交时自动地把行结束符CRLF转换成LF，而在签出代码时把LF转换成CRLF。用core.autocrlf来打开此项功能，如果是在Windows系统上，把它设置成true，这样当签出代码时，LF会被转换成CRLF：
-  ```$ git config --global core.autocrlf true```
+  `$ git config --global core.autocrlf true`
 
 * Linux或Mac系统使用LF作为行结束符，因此你不想 Git 在签出文件时进行自动的转换；当一个以CRLF为行结束符的文件不小心被引入时你肯定想进行修正，把core.autocrlf设置成input来告诉 Git 在提交时把CRLF转换成LF，签出时不转换：
-  ```$ git config --global core.autocrlf input```
+  `$ git config --global core.autocrlf input`
   这样会在Windows系统上的签出文件中保留CRLF，会在Mac和Linux系统上，包括仓库中保留LF。
 
 * 如果你是Windows程序员，且正在开发仅运行在Windows上的项目，可以设置false取消此功能，把回车符记录在库中：
-```$ git config --global core.autocrlf false```
+  `$ git config --global core.autocrlf false`
 
 ***
 
 ## git config longpaths
 
-```git config --global core.longpaths true``` 设置长文件名
+`git config --global core.longpaths true` 设置长文件名
 
 ***
 
