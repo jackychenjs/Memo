@@ -1,16 +1,23 @@
 # Tools
 
-## vscode中的vue文件中emmet进行tab键不起作用
-设置方法:
+## vscode settings
 
-文件-首选项-设置
-```json
-"emmet.triggerExpansionOnTab": true,
-"emmet.includeLanguages": {
-	"vue-html": "html",
-	"vue": "html"
-}
-```
+- #### vscode中的vue文件中emmet进行tab键不起作用
+	设置方法:
+
+	文件-首选项-设置
+	```json
+	"emmet.triggerExpansionOnTab": true,
+	"emmet.includeLanguages": {
+		"vue-html": "html",
+		"vue": "html"
+	}
+	```
+
+- #### 去除右边代码缩略图
+	```json
+	"editor.minimap.enabled": false,
+	```
 
 ## sublime text 3 安装package control
 
