@@ -46,3 +46,41 @@ Google 官方提供了对 Google Frame 插件安装情况的检测，这里直�
 
 最佳的兼容模式方案，结合考虑以上两种：
 `<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">`
+
+
+## HTML页面内容禁止选择、复制、右键
+```javascript
+oncontextmenu = 'return false'
+ondragstart = 'return false' 
+onselectstart = 'return false' 
+onselect = 'document.selection.empty()' 
+oncopy = 'document.selection.empty()' 
+onbeforecopy = 'return false' 
+onmouseup = 'document.selection.empty()'
+```
+
+1．禁止网页另存为：在<body>后面加入以下代码： 
+```html
+<noscript> 
+<iframe src="*.htm"></iframe> 
+</noscript>
+```
+
+
+2．禁止网页内容复制．粘贴：在<body>中加入以下代码： 
+```html
+<body onmousemove=/HideMenu()/ oncontextmenu="return false" ondragstart="return false" onselectstart ="return false" onselect="document.selection.empty()" oncopy="document.selection.empty()" onbeforecopy="return false" onmouseup="document.selection.empty()">
+</body>
+```
+
+3. 禁止用户选中页面从而实现禁止复制的目的，可以在css里面操作禁止，参考以下代码
+```css
+body {  
+    -webkit-touch-callout: none;  
+    -webkit-user-select: none;  
+    -khtml-user-select: none;  
+    -moz-user-select: none;  
+    -ms-user-select: none;  
+    user-select: none;  
+}
+```
