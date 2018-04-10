@@ -1,23 +1,23 @@
 
 # npm
 
-### 1. 命令
+## 命令
 
-### 2. 配置
+## 配置
 
-- #### npmrc
+- ### npmrc
   [参考 -> 官方文档](https://www.npmjs.com.cn/files/npmrc/)
 
-- #### package-lock.json
+- ### package-lock.json
   [参考 -> 知乎](https://www.zhihu.com/question/264560841)
 
   1. npm 5.0.x 版本，不管package.json怎么变，npm i 时都会根据lock文件下载package-lock.json file not updated after package.json file is changed · Issue #16866 · npm/npm这个 issue 控诉了这个问题，明明手动改了package.json，为啥不给我升级包！然后就导致了5.1.0的问题...
-  &nbsp;
+  &nbsp;&nbsp;
   2. 5.1.0版本后 npm install 会无视lock文件 去下载最新的npm然后有人提了这个issue why is package-lock being ignored? · Issue #17979 · npm/npm控诉这个问题，最后演变成5.4.2版本后的规则。
-  &nbsp;
+  &nbsp;&nbsp;
   3. 5.4.2版本后 why is package-lock being ignored? · Issue #17979 · npm/npm大致意思是，如果改了package.json，且package.json和lock文件不同，那么执行`npm i`时npm会根据package中的版本号以及语义含义去下载最新的包，并更新至lock。
   
-- #### package.json
+- ### package.json
   [参考 -> 阮一峰](http://javascript.ruanyifeng.com/nodejs/packagejson.html)
   - ##### 版本号
     > **指定版本**：比如1.2.2，遵循“大版本.次要版本.小版本”的格式规定，安装时只安装指定版本。
