@@ -1,8 +1,8 @@
-#Html
+# Html
 
-## IE版本判断
+### 1. IE版本判断
 
-```html
+``` html
 <!-- 
     [if !IE]
     [if lt IE 5.5]
@@ -26,10 +26,7 @@
 <![endif]-->
 ```
 
-
-
-## HTML Meta中添加X-UA-Compatible和IE=Edge，chrome=1有什么作用
-
+### 2. HTML Meta中添加X-UA-Compatible和IE=Edge，chrome=1有什么作用
 
 这是一个，文档兼容模式的定义。
 Edge 模式告诉 IE 以最高级模式渲染文档，也就是任何 IE 版本都以当前版本所支持的最高级标准模式渲染，避免版本升级造成的影响。简单的说，就是什么版本 IE 就用什么版本的标准模式渲染
@@ -48,7 +45,7 @@ Google 官方提供了对 Google Frame 插件安装情况的检测，这里直�
 `<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">`
 
 
-## HTML页面内容禁止选择、复制、右键
+### 3. HTML页面内容禁止选择、复制、右键
 ```javascript
 oncontextmenu = 'return false'
 ondragstart = 'return false' 

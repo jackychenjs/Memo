@@ -1,35 +1,37 @@
 # Tools
 
-## vscode settings
+### 1. VSCode
 
 - #### vscode中的vue文件中emmet进行tab键不起作用
-	设置方法:
 
-	文件-首选项-设置
-	```json
-	"emmet.triggerExpansionOnTab": true,
-	"emmet.includeLanguages": {
-		"vue-html": "html",
-		"vue": "html"
-	}
-	```
+>设置方法:
+文件-首选项-设置
+
+``` json
+"emmet.triggerExpansionOnTab": true,
+"emmet.includeLanguages": {
+	"vue-html": "html",
+	"vue": "html"
+}
+```
 
 - #### 去除右边代码缩略图
-	```json
-	"editor.minimap.enabled": false,
-	```
-
-## sublime text 3 安装package control
-
+``` json
+"editor.minimap.enabled": false,
 ```
+
+### 2. sublime text
+
+- #### 安装package control
+``` js
 import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
 ```
 
-## Tomcat
+### 3. Tomcat
 
 在Linux系统下，重启Tomcat使用命令操作的！
 
-```shell
+``` bash
 首先，进入Tomcat下的bin目录
 
 cd /usr/local/tomcat/bin
