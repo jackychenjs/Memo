@@ -36,7 +36,7 @@ console.log(toStr.call(str), toStr.call(num), toStr.call(bol), toStr.call(obj), 
 
 ## 测试"类数组"的类型
 
-``` js
+``` js {.line-numbers}
 var nodelist = document.querySelectorAll('p');
 
 function testArgs(nodelist){
@@ -56,7 +56,7 @@ testArgs(nodelist);
 
 ## 自定义事件
 
-``` js
+``` js {.line-numbers}
 var dom = document.getElementById('a');
 dom.addEventListener('alert', function(){alert(233)}, false);
 
@@ -154,7 +154,7 @@ encodeURIComponent()在编码单个URIComponent（指请求参 数）应当是�
 
   - escape()
 
-      ```javascript
+      ```javascript {}
 
       document.write(escape("http://www.w3school.com.cn/") + "<br />")
 
