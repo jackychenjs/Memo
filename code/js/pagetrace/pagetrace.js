@@ -67,21 +67,13 @@
     },
 
 
-    utils = {
-
-    },
-
-    func = {
-        send: function(view) {
-
+    var utils = {
+        parseParam: function(json) {
+            return '';
         },
 
-        settings: function() {
-
-        },
-
-        createImage: function() {
-
+        createImageRequest: function() {
+            
         },
 
         createXhrRequest: function() {
@@ -95,9 +87,21 @@
         getMousePosition: function() {
             return []
         }
-    },
+    };
 
-    events = {
+    var pageTrace = {
+        init: function() {
+
+        },
+
+        settings: function() {
+
+        },
+
+        send: function() {
+
+        },
+        
         bindLoad: function(){
 
         },
@@ -117,13 +121,12 @@
         bindChange: function() {
 
         }
-    };
+    }
 
-    
-
+    pageTrace.init();
 
     return {
-        send: func.send
-
+        send: pageTrace.send,
+        settings: pageTrace.settings
     };
 }));
