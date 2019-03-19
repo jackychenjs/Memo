@@ -276,4 +276,5 @@ Node类型	|Named Constant
 1.使用Array做为StringBuffer，代替字符串拼接的操作。然后使用Array中的join方式处理要比直接进行字符串拼接效率要高。
 
 
+## 设计模式
 
