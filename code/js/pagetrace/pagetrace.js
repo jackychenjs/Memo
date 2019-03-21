@@ -13,20 +13,91 @@
     }
 }(this, function () {
 
-    var config = {
+    var _w = window, _d = _w.document, Lizard = _w.Lizard;
+
+    function extend() {
+        var options,
+			target = arguments[0] || {},
+		 	i = 1,
+			length = arguments.length;
+
+		for (; i < length; i++) {
+			if ((options = arguments[i]) != null) {
+				for (var name in options) {
+					target[name] = options[name];
+				}
+			}
+		}
+		return target;
+    }
+
+    function parseParam(param) {
+        var _arr = []
+        for(var i in param) {
+            _arr.push(i + '=' + encodeURIComponent(param[i]))
+        }
+        return _arr.join('&');
+    }
+
+    function createImageRequest(url, callback) {
+        var img = new Image(1, 1)
+        img.onload = function() {
+            if(typeof callbak === 'function') callback();
+        }
+        img.src = url;
+    }
+
+    function createXhr() {
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true; // 跨域携带cookie
+        return xhr;
+    }
+
+    // 当前时间戳
+    function now() {
+        return new Date().getTime();
+    }
+
+    // current url
+    function getCurl() {
+        return document.URL;
+    }
+    
+    // reffer
+    function getReferrer() {
+        return document.referrer;
+    }
+
+    // 鼠标位置
+    function getMousePosition() {
+        return []
+    }
+
+    // 经纬度
+    function getLatIng() {
+        return ''
+    }
+
+    // 设备信息
+    function getDeviceInfo() {
+        return window.screen.height + 'x' + window.screen.width
+    }
+
+    var pageTrace = {
 
         targetUrl: {
-            beta: 'http://pay.beta.qunar.com/pt/pageTrace.do',
-            prod: 'http://pay.qunar.com/pt/pageTrace.do',
-            web: 'http://wxapp.qunar.com/pt/pageTrace.do'
+            beta: 'http://pay.beta.hexie.com/pt/pageTrace.do',
+            prod: 'http://pay.hexie.com/pt/pageTrace.do',
+            web: 'http://wxapp.hexie.com/pt/pageTrace.do'
         },
 
-        args = {
+        // 显示传递参数列表
+        args: {
             an: '', // appName应用的名字
-            _t: new Date().getTime(), // 前端请求时间戳
+            _t: '', // 前端请求时间戳
             pid: '', // pageId
-            ref: document.referrer, // 从哪个页面跳转到这个页面
-            curl: location.href, // 当前页面的url
+            ref: '', // 从哪个页面跳转到这个页面
+            curl: '', // 当前页面的url
             sc: '', // 页面请求的http code 当前页面请求的返回的httpcode
             di: '', // device info，设备信息，传递设备相关信息，格式：Json。
             latlng: '', // 纬度、经度数据，如果有则传，没有不传，格式lat,lng
@@ -55,71 +126,154 @@
     
                 uid: 用户id ,当无法从cookie里获取userName时,会依该uid做uv计算.
     
-                (Qunar体系外的埋点请求 比如CEQ, 需要给该字段赋值)
+                (hexie体系外的埋点请求 比如CEQ, 需要给该字段赋值)
                 stack:堆栈信息，如果是错误类型。 
                 oid：如果是针对特定元素的操作，需要指定操作对象的id。 
                 orderno：如果涉及到订单，那么需要将订单号数据输出。 
                 val：如果是输入值，可以将输入值给出。 
                 err：如果输入或者点击发生业务错误，将错误结果贴出来。
              */
-            ctx: ''
-        }
-    },
-
-
-    var utils = {
-        parseParam: function(json) {
-            return '';
+            ctx: {}
         },
 
-        createImageRequest: function() {
-            
-        },
-
-        createXhrRequest: function() {
-
-        },
-
-        now: function() {
-            return new Date().getTime();
-        },
-
-        getMousePosition: function() {
-            return []
-        }
-    };
-
-    var pageTrace = {
         init: function() {
-
+            this.setAppName();
+            this.setDevice();
         },
 
         settings: function() {
 
         },
 
-        send: function() {
+        send: function(obj) {
+            var xhr = createXhr(),
+                params = this.getParams(obj),
+                urlParams = parseParam(params),
+                url = this.getTargetUrl();
+
+            xhr.open('POST', url + '?' + urlParams);
+            xhr.send(JSON.stringify({params}))
+        },
+        
+        /**
+         * 拓展必传字段
+         * @param {*} obj 
+         */
+        getParams: function(obj) {
+            var params = {
+                an: '',
+                _t: now(),
+                pid: '',
+                ref: getReferrer(), 
+                curl: getCurl(),
+                sc: '',
+                aid: ''
+            }
+            return extend(params, obj);
+        },
+
+        getTargetUrl: function() {
+            var self = this, url;
+            switch(Lizard.envType.toLowerCase()) {
+                case 'fat':
+                case 'uat':
+                    url = self.targetUrl['beta']
+                    break;
+                case 'prd':
+                    url = self.targetUrl['prod']
+                    break;
+                default:
+            }
+            return url;
+        },
+
+        getStandingTime: function() {
+            
+        },
+
+        setAppName: function() {
+
+        },
+
+        setDevice: function() {
 
         },
         
         bindLoad: function(){
-
+            document.addEventListener('load', function(){
+                this.send({
+                    aid: 0
+                })
+            }, true);
         },
 
         bindUnload: function() {
+            document.addEventListener('beforeunload', function(){
+                this.send({
+                    aid: 1
+                })
 
+                this.send({
+                    aid: 7,
+                    ctx: {
+                        st: this.getStandingTime()
+                    }
+                })
+            }, true);
         },
 
         bindClick: function() {
-
+            document.addEventListener('click', function(e){
+                var target = e.target,
+                    _ctx = e.target.getAttribute('pt');
+                if(_ctx) {
+                    this.send({
+                        aid: 3,
+                        ctx: extend({
+                            "page": '',
+                            "action-type": target.className,
+                            "from": '',
+                            "uid": ''
+                        }, _ctx)
+                    });
+                }
+            }, true);
         },
 
         bindInput: function() {
-
+            document.addEventListener('input', function(e){
+                var target = e.target,
+                    _ctx = e.target.getAttribute('pt');
+                if(_ctx) {
+                    this.send({
+                        aid: 4,
+                        ctx: extend({
+                            "page": '',
+                            "action-type": target.className,
+                            "from": '',
+                            "uid": ''
+                        }, _ctx)
+                    });
+                }
+            }, true);
         },
 
         bindChange: function() {
-
+            document.addEventListener('change', function(e){
+                var target = e.target,
+                    _ctx = e.target.getAttribute('pt');
+                if(_ctx) {
+                    this.send({
+                        aid: 4,
+                        ctx: extend({
+                            "page": '',
+                            "action-type": target.className,
+                            "from": '',
+                            "uid": ''
+                        }, _ctx)
+                    });
+                }
+            }, true);
         }
     }
 
